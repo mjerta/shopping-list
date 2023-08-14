@@ -1,0 +1,48 @@
+{
+  "shoppingList": [
+    {
+      "product": "Apples",
+      "price": 2.99
+    },
+    {
+      "product": "Bananas",
+      "price": 1.25
+    },
+    {
+      "product": "Milk",
+      "price": 3.49
+    },
+    {
+      "product": "Bread",
+      "price": 2.15
+    },
+    {
+      "product": "Eggs",
+      "price": 1.99
+    },
+    {
+      "product": "Chicken",
+      "price": 6.75
+    },
+    {
+      "product": "Rice",
+      "price": 1.99
+    },
+    {
+      "product": "Tomatoes",
+      "price": 0.75
+    },
+    {
+      "product": "Onions",
+      "price": 0.5
+    },
+    {
+      "product": "s",
+      "price": 2.0
+    },
+    {
+      "product": "tr",
+      "price": 6.0
+    }
+  ]
+}
