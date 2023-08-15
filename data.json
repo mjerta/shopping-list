@@ -43,6 +43,10 @@
     {
       "product": "tr",
       "price": 6.0
+    },
+    {
+      "product": "cola",
+      "price": 1.99
     }
   ]
 }

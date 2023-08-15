@@ -1,4 +1,4 @@
-Adding list and test for fetching this data
+Still in progress
 
-Adding a simple list in json
-Testing the fetch api
+Adding the error handling
+Adding the form for submitting
