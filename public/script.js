@@ -8,8 +8,25 @@ function sendData(url) {
   formEl.addEventListener("submit", (e) => {
     e.preventDefault();
     const formData = new FormData(formEl);
-    const data = Object.fromEntries(formData);
-    console.log(data);
+
+    const shoppingList = [
+      {
+        product: formData.get("input-data"),
+        price: 2.99,
+      },
+      // Other products...
+    ];
+    // console.log(url);
+
+    fetch("/api", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(shoppingList),
+    }).then((response) => {
+      console.log(response);
+    });
   });
 }
 
