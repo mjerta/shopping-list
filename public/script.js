@@ -9,13 +9,11 @@ function sendData(url) {
     e.preventDefault();
     const formData = new FormData(formEl);
 
-    const shoppingList = [
-      {
-        product: formData.get("input-data"),
-        price: 2.99,
-      },
-      // Other products...
-    ];
+    const shoppingList = {
+      product: formData.get("input-data"),
+      price: 2.99,
+    };
+    // Other products...
     // console.log(url);
 
     fetch("/api", {

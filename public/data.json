@@ -38,15 +38,31 @@
     },
     {
       "product": "s",
-      "price": 2.0
+      "price": 2
     },
     {
       "product": "tr",
-      "price": 6.0
+      "price": 6
     },
     {
       "product": "cola",
       "price": 1.99
+    },
+    {
+      "product": "hhh",
+      "price": 2.99
+    },
+    {
+      "product": "pasta",
+      "price": 2.99
+    },
+    {
+      "product": "sinas",
+      "price": 2.99
+    },
+    {
+      "product": "sinas",
+      "price": 2.99
     }
   ]
 }
