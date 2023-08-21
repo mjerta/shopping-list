@@ -63,6 +63,10 @@
     {
       "product": "sinas",
       "price": 2.99
+    },
+    {
+      "product": "colo",
+      "price": 2.99
     }
   ]
 }
