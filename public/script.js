@@ -1,4 +1,3 @@
-const url = "./data.json";
 const list = document.querySelector(".data-list");
 const existingItems = new Set(); // Keep track of existing items
 
@@ -28,6 +27,7 @@ function sendData(url) {
   });
 }
 
+const url = "./data.json";
 sendData(url);
 
 // Initial call to getData
@@ -51,10 +51,26 @@ async function getData() {
   shoppingList.forEach((element) => {
     if (!existingItems.has(element.product)) {
       const listItem = document.createElement("li");
+      listItem.classList.add("li-item");
       listItem.textContent = element.product;
       list.appendChild(listItem);
-
       existingItems.add(element.product); // Add the new item to the set
     }
   });
 }
+
+async function getAllElements(selector) {
+  await getData();
+  const allElements = document.querySelectorAll(selector);
+  return allElements;
+}
+
+async function clickListElement(list, callBack) {
+  const arr = await callBack(list);
+
+  arr.forEach((item) => {
+    console.log(item);
+  });
+}
+
+clickListElement(".li-item", getAllElements);

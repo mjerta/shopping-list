@@ -67,6 +67,22 @@
     {
       "product": "colo",
       "price": 2.99
+    },
+    {
+      "product": "colo",
+      "price": 2.99
+    },
+    {
+      "product": "colote",
+      "price": 2.99
+    },
+    {
+      "product": "test",
+      "price": 2.99
+    },
+    {
+      "product": "test",
+      "price": 2.99
     }
   ]
 }
