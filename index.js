@@ -7,6 +7,7 @@ app.use(express.static("public"));
 app.use(express.json({ limint: "1mb" }));
 app.post("/api", (request, response) => {
   const newData = request.body;
+  console.log(newData);
 
   fs.readFile("public/data.json", (err, data) => {
     if (err) {

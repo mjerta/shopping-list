@@ -8,9 +8,11 @@ function sendData(url) {
     e.preventDefault();
     const formData = new FormData(formEl);
 
+    console.log(formData);
+
     const shoppingList = {
-      product: formData.get("input-data"),
-      price: 2.99,
+      product: formData.get("article"),
+      price: formData.get("price"),
     };
     // Other products...
     // console.log(url);
@@ -52,7 +54,7 @@ async function getData() {
     if (!existingItems.has(element.product)) {
       const listItem = document.createElement("li");
       listItem.classList.add("li-item");
-      listItem.textContent = element.product;
+      listItem.textContent = `${element.product} - \u20AC ${element.price}`;
       list.appendChild(listItem);
       existingItems.add(element.product); // Add the new item to the set
     }

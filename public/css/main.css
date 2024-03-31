@@ -20,3 +20,8 @@ main li {
   padding: 1rem;
   cursor: pointer;
 }
+
+input[type="number"] {
+  margin: 0;
+  appearance: textfield;
+}
