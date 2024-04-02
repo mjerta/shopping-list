@@ -8,7 +8,7 @@ function sendData(url) {
     e.preventDefault();
     const formData = new FormData(formEl);
 
-    console.log(formData);
+    // console.log(formData);
 
     const shoppingList = {
       product: formData.get("article"),
@@ -23,9 +23,11 @@ function sendData(url) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(shoppingList),
-    }).then((response) => {
-      console.log(response);
-    });
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data.status);
+      });
   });
 }
 

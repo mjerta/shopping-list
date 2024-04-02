@@ -1,13 +1,15 @@
 const express = require("express");
 const fs = require("fs");
+const { eventNames } = require("process");
 const app = express();
 app.listen(3000, () => console.log("listening at 3000"));
 app.use(express.static("public"));
 
-app.use(express.json({ limint: "1mb" }));
+app.use(express.json({ limit: "1mb" }));
+
+//This is for handling incoming data
 app.post("/api", (request, response) => {
   const newData = request.body;
-  console.log(newData);
 
   fs.readFile("public/data.json", (err, data) => {
     if (err) {
@@ -17,6 +19,16 @@ app.post("/api", (request, response) => {
 
     try {
       const jsonData = JSON.parse(data);
+      const compareSequence = jsonData.shoppingList.some(
+        (item) => item.product === newData.product
+      );
+
+      if (compareSequence) {
+        console.log("true");
+        response.json({
+          status: "goed gedaan",
+        });
+      }
       jsonData.shoppingList.push(newData);
       fs.writeFile(
         "public/data.json",
@@ -33,9 +45,5 @@ app.post("/api", (request, response) => {
     } catch (parseError) {
       console.log("Error parsing JSON:", parseError);
     }
-  });
-
-  response.json({
-    status: "succes",
   });
 });
