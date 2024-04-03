@@ -24,9 +24,15 @@ function sendData(url) {
       },
       body: JSON.stringify(shoppingList),
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if (response.ok) return response.json();
+        throw new Error(response.status);
+      })
       .then((data) => {
-        console.log(data.status);
+        console.log(`Response from server: ${data.returnMessage}`);
+      })
+      .catch((error) => {
+        console.log(error);
       });
   });
 }

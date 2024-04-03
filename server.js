@@ -24,24 +24,26 @@ app.post("/api", (request, response) => {
       );
 
       if (compareSequence) {
-        console.log("true");
+        console.log("Double record detected");
         response.json({
-          status: "goed gedaan",
+          returnMessage: "Double record detected",
         });
-      }
-      jsonData.shoppingList.push(newData);
-      fs.writeFile(
-        "public/data.json",
-        JSON.stringify(jsonData, null, 2),
-        "utf8",
-        (err) => {
-          if (err) {
-            console.log("Error writing file", err);
+      } else {
+        jsonData.shoppingList.push(newData);
+        fs.writeFile(
+          "public/data.json",
+          JSON.stringify(jsonData, null, 2),
+          "utf8",
+          (err) => {
+            if (err) {
+              console.log("Error writing file", err);
+              return;
+            }
+            console.log("JSON file updated successfully");
             return;
           }
-          console.log("JSON file updated successfully");
-        }
-      );
+        );
+      }
     } catch (parseError) {
       console.log("Error parsing JSON:", parseError);
     }
