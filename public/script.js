@@ -58,12 +58,23 @@ async function getData() {
 
   const shoppingList = data.shoppingList;
 
+  let iterator = 0;
   shoppingList.forEach((element) => {
     if (!existingItems.has(element.product)) {
-      const listItem = document.createElement("li");
-      listItem.classList.add("li-item");
-      listItem.textContent = `${element.product} - \u20AC ${element.price}`;
-      list.appendChild(listItem);
+      iterator++;
+      const outerBox = document.createElement("div");
+      const output = document.createElement("div");
+      const button = document.createElement("button");
+      outerBox.classList.add("outer-box");
+      button.classList.add("delete-button");
+      button.dataset.count = iterator;
+      output.classList.add("output");
+      output.dataset.count = iterator;
+      output.textContent = `${element.product} - \u20AC ${element.price}`;
+      button.textContent = "Delete item";
+      outerBox.appendChild(output);
+      outerBox.appendChild(button);
+      list.appendChild(outerBox);
       existingItems.add(element.product); // Add the new item to the set
     }
   });
@@ -75,12 +86,14 @@ async function getAllElements(selector) {
   return allElements;
 }
 
-async function clickListElement(list, callBack) {
-  const arr = await callBack(list);
-
-  arr.forEach((item) => {
-    console.log(item);
-  });
+function addDeleteFunctionality(callback) {
+  for (let i = 0; i < callback.length; i += 2) {
+    //this are the two i want to compare with each other
+    console.log(callback[i].getAttribute("data-count"));
+    console.log(callback[i].textContent);
+    console.log(callback[i + 1].getAttribute("data-count"));
+  }
 }
 
-clickListElement(".li-item", getAllElements);
+const dataAttribute = "[data-count]";
+getAllElements(dataAttribute).then(addDeleteFunctionality);

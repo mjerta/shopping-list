@@ -1,12 +1,16 @@
 {
   "shoppingList": [
     {
-      "product": "Apples",
-      "price": 2.99
+      "product": "test7",
+      "price": "3"
     },
     {
-      "product": "setete32",
-      "price": "33"
+      "product": "test8",
+      "price": "3"
+    },
+    {
+      "product": "test9",
+      "price": "3"
     }
   ]
 }

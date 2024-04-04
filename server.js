@@ -19,17 +19,26 @@ app.post("/api", (request, response) => {
 
     try {
       const jsonData = JSON.parse(data);
+      console.log(jsonData.shoppingList);
+      // some variables
       const compareSequence = jsonData.shoppingList.some(
         (item) => item.product === newData.product
       );
+      const indexToDelete = jsonData.shoppingList.findIndex(
+        (item) => item.product === "test8"
+      );
+      console.log(indexToDelete);
 
+      console.log(compareSequence);
       if (compareSequence) {
         console.log("Double record detected");
         response.json({
           returnMessage: "Double record detected",
         });
+        return;
       } else {
         jsonData.shoppingList.push(newData);
+        console.log("start writing to json file");
         fs.writeFile(
           "public/data.json",
           JSON.stringify(jsonData, null, 2),
