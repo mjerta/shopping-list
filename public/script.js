@@ -5,6 +5,10 @@ function sendData(url) {
   const formEl = document.querySelector("#data-form");
 
   formEl.addEventListener("submit", (e) => {
+    console.log(intervalId);
+    stopInterval();
+    startInterval();
+
     e.preventDefault();
     const formData = new FormData(formEl);
 
@@ -34,7 +38,6 @@ function sendData(url) {
         } else {
           // console.log(data.item);
           const dataAttribute = ".delete-button";
-          getAllElements(dataAttribute).then(addDeleteFunctionality);
           console.log(data.message);
           console.log(data.item);
         }
@@ -48,24 +51,13 @@ function sendData(url) {
 const url = "./data.json";
 sendData(url);
 
-// Initial call to getData
-// setInterval(() => {
-//   getData()
-//     .then((response) => {
-//       // console.log("working");
-//     })
-//     .catch((error) => {
-//       console.log("something goes wrong");
-//       console.log(error);
-//     });
-// }, 1000);
-
 async function getData() {
+  let test;
   const response = await fetch(url);
   const data = await response.json();
 
   const shoppingList = data.shoppingList;
-
+  console.log(shoppingList);
   shoppingList.forEach((element) => {
     if (!existingItems.has(element.product)) {
       const outerBox = document.createElement("div");
@@ -94,12 +86,18 @@ async function getAllElements(selector) {
 function addDeleteFunctionality(callback) {
   callback.forEach((element) => {
     const data = { id: element.getAttribute("id") };
-    console.log(data);
+    // startInterval();
+    // console.log(data);
     element.addEventListener("click", () => {
       console.log(element);
       const parent = element.parentNode;
-      console.log(parent);
-      parent.parentNode.removeChild(parent);
+      if (parent) {
+        console.log(parent);
+        const parentOfParent = parent.parentNode;
+        if (parentOfParent) {
+          parentOfParent.removeChild(parent);
+        }
+      }
       fetch("/api", {
         method: "DELETE",
         headers: {
@@ -129,3 +127,23 @@ function addDeleteFunctionality(callback) {
 
 const dataAttribute = ".delete-button";
 getAllElements(dataAttribute).then(addDeleteFunctionality);
+
+let intervalId;
+
+function startInterval() {
+  intervalId = setInterval(() => {
+    const dataAttribute = ".delete-button";
+    getAllElements(dataAttribute)
+      .then(addDeleteFunctionality)
+      .catch((error) => {
+        console.log("something goes wrong");
+        console.log(error);
+      });
+  }, 1000);
+}
+
+function stopInterval() {
+  clearInterval(intervalId);
+}
+
+startInterval();
