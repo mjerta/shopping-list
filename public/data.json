@@ -1,16 +1,14 @@
 {
   "shoppingList": [
     {
-      "product": "test7",
-      "price": "3"
+      "product": "5",
+      "price": "1012",
+      "id": "1712366435118"
     },
     {
-      "product": "test8",
-      "price": "3"
-    },
-    {
-      "product": "test9",
-      "price": "3"
+      "product": "10",
+      "price": "1012",
+      "id": "1712366527318"
     }
   ]
 }

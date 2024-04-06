@@ -29,7 +29,15 @@ function sendData(url) {
         throw new Error(response.status);
       })
       .then((data) => {
-        console.log(`Response from server: ${data.returnMessage}`);
+        if (data.returnMessage) {
+          console.log(`Response from server: ${data.returnMessage}`);
+        } else {
+          // console.log(data.item);
+          const dataAttribute = ".delete-button";
+          getAllElements(dataAttribute).then(addDeleteFunctionality);
+          console.log(data.message);
+          console.log(data.item);
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -41,16 +49,16 @@ const url = "./data.json";
 sendData(url);
 
 // Initial call to getData
-setInterval(() => {
-  getData()
-    .then((response) => {
-      // console.log("working");
-    })
-    .catch((error) => {
-      console.log("something goes wrong");
-      console.log(error);
-    });
-}, 1000);
+// setInterval(() => {
+//   getData()
+//     .then((response) => {
+//       // console.log("working");
+//     })
+//     .catch((error) => {
+//       console.log("something goes wrong");
+//       console.log(error);
+//     });
+// }, 1000);
 
 async function getData() {
   const response = await fetch(url);
@@ -58,20 +66,17 @@ async function getData() {
 
   const shoppingList = data.shoppingList;
 
-  let iterator = 0;
   shoppingList.forEach((element) => {
     if (!existingItems.has(element.product)) {
-      iterator++;
       const outerBox = document.createElement("div");
       const output = document.createElement("div");
       const button = document.createElement("button");
       outerBox.classList.add("outer-box");
       button.classList.add("delete-button");
-      button.dataset.count = iterator;
       output.classList.add("output");
-      output.dataset.count = iterator;
       output.textContent = `${element.product} - \u20AC ${element.price}`;
       button.textContent = "Delete item";
+      button.setAttribute("id", element.id);
       outerBox.appendChild(output);
       outerBox.appendChild(button);
       list.appendChild(outerBox);
@@ -87,13 +92,40 @@ async function getAllElements(selector) {
 }
 
 function addDeleteFunctionality(callback) {
-  for (let i = 0; i < callback.length; i += 2) {
-    //this are the two i want to compare with each other
-    console.log(callback[i].getAttribute("data-count"));
-    console.log(callback[i].textContent);
-    console.log(callback[i + 1].getAttribute("data-count"));
-  }
+  callback.forEach((element) => {
+    const data = { id: element.getAttribute("id") };
+    console.log(data);
+    element.addEventListener("click", () => {
+      console.log(element);
+      const parent = element.parentNode;
+      console.log(parent);
+      parent.parentNode.removeChild(parent);
+      fetch("/api", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((response) => {
+          if (response.ok) return response.json();
+          throw new Error(response.status);
+        })
+        .then((data) => {
+          if (data.returnMessage) {
+            console.log(`Response from server: ${data.returnMessage}`);
+          } else {
+            // console.log(data.item);
+            console.log(data.message);
+            console.log(data.item);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    });
+  });
 }
 
-const dataAttribute = "[data-count]";
+const dataAttribute = ".delete-button";
 getAllElements(dataAttribute).then(addDeleteFunctionality);
