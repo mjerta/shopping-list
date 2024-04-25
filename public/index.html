@@ -9,11 +9,17 @@
   <body>
     <main>
       <form id="data-form">
-        <label for="input-data">New Product:</label>
-        <input type="text" id="input-data" name="input-data" />
+        <div class="outer-box-input">
+          <label for="article">New Product:</label>
+          <input type="text" id="article-data" name="article" />
+        </div>
+        <div class="outer-box-input">
+          <label for="price">Price</label>
+          <input type="number" name="price" id="price-data" />
+        </div>
         <button type="submit">submit</button>
       </form>
-      <ul class="data-list"></ul>
+      <div class="data-list"></div>
     </main>
     <script src="./script.js"></script>
   </body>
