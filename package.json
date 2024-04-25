@@ -2,7 +2,7 @@
   "name": "shopping-list",
   "version": "1.0.0",
   "description": "This is a shopping list application",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

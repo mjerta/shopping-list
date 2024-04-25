@@ -1,0 +1,5 @@
+Change names, return message & prevent doubles
+
+Change index.js to server.js
+Make sure there is a returning message from the post request
+Literal doubles are prevented from enterering
