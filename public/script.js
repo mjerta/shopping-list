@@ -60,7 +60,7 @@ function addItem(e) {
   };
 
   // using the POST method
-  fetch("/api", {
+  fetch("../api", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -148,7 +148,7 @@ function deleteItem(elementCLicked, id) {
   }
 
   // using the DELETE method
-  fetch("/api", {
+  fetch("../api", {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
