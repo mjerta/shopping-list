@@ -1,14 +1,16 @@
+// the main setup
 const express = require("express");
 const fs = require("fs").promises;
-// const { eventNames } = require("process");
 const app = express();
+// Used to serve all pages and files withing public
 app.listen(3000, () => console.log("listening at 3000"));
 app.use(express.static("public"));
 
-app.use(express.json({ limit: "1mb" }));
+app.use(express.json({ limit: "5mb" }));
 
 const dataFilePath = "public/data.json";
 
+// read all items from json file
 async function readItemsFromFile() {
   try {
     const data = await fs.readFile(dataFilePath);
@@ -18,8 +20,8 @@ async function readItemsFromFile() {
     throw error;
   }
 }
-
-async function writeData(data) {
+// write new data ( could be POST, PUT or DELETE)
+async function writeItemToFile(data) {
   try {
     await fs.writeFile(dataFilePath, JSON.stringify(data, null, 2));
   } catch (error) {
@@ -28,7 +30,7 @@ async function writeData(data) {
   }
 }
 
-// Create an item
+// HANDLING THE POST request - this will add a new item
 app.post("/api", async (req, res) => {
   try {
     const newItem = req.body;
@@ -48,7 +50,7 @@ app.post("/api", async (req, res) => {
     newItem.id = Date.now().toString(); // Generate unique ID (timestamp)
     console.log(newItem.id);
     jsonData.shoppingList.push(newItem);
-    await writeData(jsonData);
+    await writeItemToFile(jsonData);
     res
       .status(201)
       .json({ message: "Item created successfully", item: newItem });
@@ -57,6 +59,7 @@ app.post("/api", async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
+// HANDLING THE DELETE request - this will delete a certain item
 app.delete("/api", async (req, res) => {
   try {
     console.log("delete action");
@@ -73,7 +76,7 @@ app.delete("/api", async (req, res) => {
       );
       jsonData.shoppingList = filteredData;
       console.log(jsonData.shoppingList);
-      await writeData(jsonData);
+      await writeItemToFile(jsonData);
       res
         .status(201)
         .json({ message: "Item deleted successfully", item: newItem });
