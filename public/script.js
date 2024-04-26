@@ -4,6 +4,8 @@ const url = "./data.json"; //this is the url from the data json file
 let existingItems = new Set(); // Keep track of existing items
 let addItemActivated; // Is used to keep track of items are being added
 let isClickInProgress = false; // is used to check if a click event is being in place at a certain moment
+const baseUrl = window.location.origin + window.location.pathname; // Get the base URL
+const apiUrl = baseUrl + "api"; // Construct the API URL relative to the base URL
 
 async function getData() {
   const response = await fetch(url); // this will read out the file
@@ -60,7 +62,7 @@ function addItem(e) {
   };
 
   // using the POST method
-  fetch("../api", {
+  fetch(apiUrl, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -148,7 +150,7 @@ function deleteItem(elementCLicked, id) {
   }
 
   // using the DELETE method
-  fetch("../api", {
+  fetch(apiUrl, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
@@ -221,3 +223,5 @@ document.addEventListener("click", () => {
     isClickInProgress = false;
   }, 500);
 });
+
+console.log(apiUrl);
