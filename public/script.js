@@ -10,12 +10,12 @@ async function getData() {
   const data = await response.json(); // this will turn the json input into a JavaScript object
 
   const shoppingList = data.shoppingList; // this is used to get the array 'shoppingList' from the json file
-
   // this will loop over all the object inside the 'shoppingList' array
   shoppingList.forEach((element) => {
     // as long the existingItems set is not been set with the specifik element it will continue
     // to loop the next item.
     if (!existingItems.has(element.product)) {
+      console.log("added");
       // setting variables for the HTML elemenmts
       const outerBox = document.createElement("div");
       const output = document.createElement("div");
@@ -39,6 +39,35 @@ async function getData() {
       existingItems.add(element.product);
     }
   });
+  console.log(existingItems);
+  console.log(shoppingList);
+  if (shoppingList.length < existingItems.size) {
+    const arrayFromSet = [...existingItems];
+
+    //convert shoppingList array of objects to a plain array
+    const shoppingListValues = shoppingList.map((item) => item.product);
+
+    // filter it and be left over with the items that need to me removrf
+    const itemToRemove = arrayFromSet.filter(
+      (item) => !shoppingListValues.includes(item)
+    );
+    console.log(itemToRemove);
+    const allOutputItems = document.querySelectorAll(".output");
+    allOutputItems.forEach((element) => {
+      itemToRemove.forEach((item) => {
+        if (item == element.getAttribute("item")) {
+          element.parentNode.remove();
+        }
+      });
+    });
+
+    // removing the item from the set if it might have changed
+    const filteredArray = arrayFromSet.filter((id) =>
+      shoppingList.some((obj) => obj.product === id)
+    );
+    // updating the new Set
+    existingItems = new Set(filteredArray);
+  }
 }
 // click event to execute addItem function
 formEl.addEventListener("submit", addItem);
@@ -106,7 +135,6 @@ async function getAllElements() {
 function activateDeleteButtons(callback) {
   if (addItemActivated) {
     // when new items are being added there shiould only be added one event listener
-    console.log(list.childNodes.length);
     if (list.childNodes.length != 0) {
       const lastItem = callback[callback.length - 1];
 
@@ -203,7 +231,7 @@ function startInterval() {
     } else {
       console.log("Update of items not worked, click event was taking place");
     }
-  }, 30000);
+  }, 10000);
 }
 startInterval();
 
