@@ -12,7 +12,6 @@ async function getData() {
   const data = await response.json(); // this will turn the json input into a JavaScript object
 
   const shoppingList = data.shoppingList; // this is used to get the array 'shoppingList' from the json file
-
   // this will loop over all the object inside the 'shoppingList' array
   shoppingList.forEach((element) => {
     // as long the existingItems set is not been set with the specifik element it will continue
@@ -41,6 +40,40 @@ async function getData() {
       existingItems.add(element.product);
     }
   });
+
+  // the following conditional will make sure if the shopping list array is smaller
+  // (thus making the array being modified from another client)
+  // the existingItems array will be modified accordingly
+  if (shoppingList.length < existingItems.size) {
+    // convert existiITems Set into an array
+    const arrayFromSet = [...existingItems];
+
+    //convert shoppingList array of objects to a plain array
+    const shoppingListValues = shoppingList.map((item) => item.product);
+
+    // filter to get all values that are different. Based on the array that has more( in this case that would be the arrayFromSet) and store it in a variable
+    const itemToRemove = arrayFromSet.filter(
+      (item) => !shoppingListValues.includes(item)
+    );
+
+    // with the value of itemsToRemove its possible to remove the specifik elements from the DOM without refreshing
+    const allOutputItems = document.querySelectorAll(".output");
+    allOutputItems.forEach((element) => {
+      itemToRemove.forEach((item) => {
+        // so when a certain element with the value is the same as the value of itemToRemove it will be remove from the DOM
+        if (item == element.getAttribute("item")) {
+          element.parentNode.remove();
+        }
+      });
+    });
+
+    // removing the item from the set if it might have changed
+    const filteredArray = arrayFromSet.filter((id) =>
+      shoppingList.some((obj) => obj.product === id)
+    );
+    // updating the new Set
+    existingItems = new Set(filteredArray);
+  }
 }
 // click event to execute addItem function
 formEl.addEventListener("submit", addItem);
@@ -52,7 +85,6 @@ function addItem(e) {
   // startInterval();
   const formData = new FormData(formEl);
   formEl.reset();
-  console.log(formEl.childNodes[1].childNodes[3]);
   formEl.childNodes[1].childNodes[3].focus();
 
   // defining the shoppingList Object
@@ -81,7 +113,6 @@ function addItem(e) {
       }
     })
     .then((data) => {
-      console.log(data);
       if (data.returnMessage) {
         console.log(`Response from server: ${data.returnMessage}`);
       } else {
@@ -108,7 +139,6 @@ async function getAllElements() {
 function activateDeleteButtons(callback) {
   if (addItemActivated) {
     // when new items are being added there shiould only be added one event listener
-    console.log(list.childNodes.length);
     if (list.childNodes.length != 0) {
       const lastItem = callback[callback.length - 1];
 
@@ -205,7 +235,7 @@ function startInterval() {
     } else {
       console.log("Update of items not worked, click event was taking place");
     }
-  }, 30000);
+  }, 10000);
 }
 startInterval();
 
