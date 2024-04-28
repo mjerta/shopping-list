@@ -15,7 +15,6 @@ async function getData() {
     // as long the existingItems set is not been set with the specifik element it will continue
     // to loop the next item.
     if (!existingItems.has(element.product)) {
-      console.log("added");
       // setting variables for the HTML elemenmts
       const outerBox = document.createElement("div");
       const output = document.createElement("div");
@@ -39,22 +38,27 @@ async function getData() {
       existingItems.add(element.product);
     }
   });
-  console.log(existingItems);
-  console.log(shoppingList);
+
+  // the following conditional will make sure if the shopping list array is smaller
+  // (thus making the array being modified from another client)
+  // the existingItems array will be modified accordingly
   if (shoppingList.length < existingItems.size) {
+    // convert existiITems Set into an array
     const arrayFromSet = [...existingItems];
 
     //convert shoppingList array of objects to a plain array
     const shoppingListValues = shoppingList.map((item) => item.product);
 
-    // filter it and be left over with the items that need to me removrf
+    // filter to get all values that are different. Based on the array that has more( in this case that would be the arrayFromSet) and store it in a variable
     const itemToRemove = arrayFromSet.filter(
       (item) => !shoppingListValues.includes(item)
     );
-    console.log(itemToRemove);
+
+    // with the value of itemsToRemove its possible to remove the specifik elements from the DOM without refreshing
     const allOutputItems = document.querySelectorAll(".output");
     allOutputItems.forEach((element) => {
       itemToRemove.forEach((item) => {
+        // so when a certain element with the value is the same as the value of itemToRemove it will be remove from the DOM
         if (item == element.getAttribute("item")) {
           element.parentNode.remove();
         }
@@ -79,7 +83,6 @@ function addItem(e) {
   // startInterval();
   const formData = new FormData(formEl);
   formEl.reset();
-  console.log(formEl.childNodes[1].childNodes[3]);
   formEl.childNodes[1].childNodes[3].focus();
 
   // defining the shoppingList Object
@@ -108,7 +111,6 @@ function addItem(e) {
       }
     })
     .then((data) => {
-      console.log(data);
       if (data.returnMessage) {
         console.log(`Response from server: ${data.returnMessage}`);
       } else {
