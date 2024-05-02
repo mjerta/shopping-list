@@ -76,7 +76,7 @@ async function getData() {
   }
 }
 // click event to execute addItem function
-formEl.addEventListener("submit", addItem);
+// formEl.addEventListener("submit", addItem);
 
 // creates new item
 function addItem(e) {
