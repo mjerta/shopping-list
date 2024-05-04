@@ -18,33 +18,45 @@ main {
   max-width: calc(827rem / 16);
   min-height: 1024px;
   background-color: var(--main-bg-color);
+  padding-top: calc(128rem / 16);
 }
 
 .line-y-axis {
   position: absolute;
+  top: 0;
   height: 100%;
   width: calc(3rem / 16);
   margin-left: 113px;
-  background-color: red;
+  background-color: var(--line-y-axis);
 }
 .data-list {
-  background-color: hwb(139 33% 58% / 0.445);
-  padding: 7px;
+  /* padding: 7px; */
 }
 .outer-box {
+  height: 31px;
+  border-bottom: 2px solid var(--line-x-axis);
   display: flex;
   justify-content: center;
-  margin-bottom: 7px;
   gap: 7px;
+
+  &:first-of-type {
+    border-top: 2px solid var(--line-x-axis);
+  }
+}
+
+.inner-box {
+  display: flex;
+  margin-left: 113px;
+  margin-right: 150px;
+  width: 100%;
 }
 
 .output {
-  list-style: none;
-  font-size: 2rem;
+  /* font-size: 2rem; */
   text-align: center;
-  padding: 1rem;
+  /* padding: 1rem; */
   cursor: pointer;
-  background-color: beige;
+  /* background-color: beige; */
 }
 
 button[type="submit"] {
@@ -57,11 +69,11 @@ input[type="number"] {
 }
 
 .delete-button {
-  padding: 5px;
+  /* padding: 5px; */
   /* height: 50%; */
   cursor: pointer;
-  background-color: rgb(189, 87, 87);
-  color: white;
+  background-color: var(--main-bg-color);
+  /* color: white; */
   font-weight: bold;
   letter-spacing: 2px;
   border: none;
