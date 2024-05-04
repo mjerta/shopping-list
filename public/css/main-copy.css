@@ -12,6 +12,28 @@
   margin: 0;
 }
 
+@media screen and (min-width: 300px) {
+  html {
+    font-size: 8px;
+    font-size: clamp(8px, 2.66vw, 16px);
+  }
+
+  .inner-box {
+    margin-right: clamp(10px, 3.33vw, 150px);
+  }
+}
+@media screen and (min-width: 827px) {
+  html {
+    font-size: 16px;
+  }
+  .inner-box {
+    margin-right: 150px;
+  }
+  .test {
+    width: 150px;
+  }
+}
+
 main {
   position: relative;
   margin: 0 auto;
@@ -26,7 +48,7 @@ main {
   top: 0;
   height: 100%;
   width: calc(3rem / 16);
-  margin-left: 113px;
+  margin-left: calc(113rem / 16);
   background-color: var(--line-y-axis);
 }
 .data-list {
@@ -46,9 +68,13 @@ main {
 
 .inner-box {
   display: flex;
-  margin-left: 113px;
-  margin-right: 150px;
+  align-items: flex-end;
+  margin-left: calc(113rem / 16);
+  /* margin-right: 10px; */
+  /* margin-right: calc(150rem / 16); */
+
   width: 100%;
+  padding-left: calc(42.5rem / 16);
 }
 
 .output {
@@ -57,6 +83,10 @@ main {
   /* padding: 1rem; */
   cursor: pointer;
   /* background-color: beige; */
+}
+
+.price {
+  margin: 0 auto;
 }
 
 button[type="submit"] {
@@ -74,7 +104,8 @@ input[type="number"] {
   cursor: pointer;
   background-color: var(--main-bg-color);
   /* color: white; */
-  font-weight: bold;
-  letter-spacing: 2px;
+  /* font-weight: bold; */
+  /* letter-spacing: 2px; */
   border: none;
+  font-size: 1rem;
 }
