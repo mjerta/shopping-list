@@ -17,20 +17,10 @@
     font-size: 8px;
     font-size: clamp(8px, 2.66vw, 16px);
   }
-
-  .inner-box {
-    margin-right: clamp(10px, 3.33vw, 150px);
-  }
 }
 @media screen and (min-width: 827px) {
   html {
     font-size: 16px;
-  }
-  .inner-box {
-    margin-right: 150px;
-  }
-  .test {
-    width: 150px;
   }
 }
 
@@ -73,11 +63,31 @@ main {
   /* margin-right: 10px; */
   /* margin-right: calc(150rem / 16); */
 
-  width: 100%;
+  width: 400px;
   padding-left: calc(42.5rem / 16);
+
+  & :nth-child(1) {
+    flex-grow: 1;
+    background-color: yellow;
+  }
+  & :nth-child(2) {
+    flex-grow: 1;
+    background-color: lightblue;
+  }
+  & :nth-child(3) {
+    flex-grow: 1;
+    background-color: lightcoral;
+  }
+  & :nth-child(4) {
+    flex-grow: 1;
+    flex-shrink: 7;
+    background-color: rgb(128, 240, 128);
+  }
 }
 
 .output {
+  flex-basis: 100px;
+  /* width: 100px; */
   /* font-size: 2rem; */
   text-align: center;
   /* padding: 1rem; */
@@ -86,7 +96,7 @@ main {
 }
 
 .price {
-  margin: 0 auto;
+  /* margin: 0 auto; */
 }
 
 button[type="submit"] {
@@ -108,4 +118,8 @@ input[type="number"] {
   /* letter-spacing: 2px; */
   border: none;
   font-size: 1rem;
+}
+
+.hidden {
+  height: 10px;
 }
