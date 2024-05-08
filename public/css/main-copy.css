@@ -2,6 +2,9 @@
   --main-bg-color: #e1e0e8;
   --line-y-axis: #d6ccd9;
   --line-x-axis: #375ddb;
+  --font-color: #300080;
+  --line-font-size: 1.4rem;
+  --lines-line-height: 1.4rem;
 }
 
 *,
@@ -12,10 +15,15 @@
   margin: 0;
 }
 
+body {
+  /* font-family: "Zeyada", cursive; */
+  font-family: "Satisfy", cursive;
+  /* font-weight: 400; */
+  /* font-style: normal; */
+}
 @media screen and (min-width: 300px) {
   html {
-    font-size: 8px;
-    font-size: clamp(8px, 2.66vw, 16px);
+    font-size: clamp(12px, 2.66vw, 16px);
   }
 }
 @media screen and (min-width: 827px) {
@@ -45,7 +53,7 @@ main {
   /* padding: 7px; */
 }
 .outer-box {
-  height: 31px;
+  height: 2rem;
   border-bottom: 2px solid var(--line-x-axis);
   display: flex;
   justify-content: center;
@@ -57,42 +65,34 @@ main {
 }
 
 .inner-box {
+  line-height: var(--lines-line-height);
   display: flex;
   align-items: flex-end;
+  width: 100%;
   margin-left: calc(113rem / 16);
-  /* margin-right: 10px; */
-  /* margin-right: calc(150rem / 16); */
-
-  width: 400px;
   padding-left: calc(42.5rem / 16);
 
   & :nth-child(1) {
     flex-grow: 1;
-    background-color: yellow;
   }
   & :nth-child(2) {
     flex-grow: 1;
-    background-color: lightblue;
   }
   & :nth-child(3) {
     flex-grow: 1;
-    background-color: lightcoral;
   }
   & :nth-child(4) {
     flex-grow: 1;
-    flex-shrink: 7;
-    background-color: rgb(128, 240, 128);
+    flex-shrink: 2;
   }
 }
 
 .output {
-  flex-basis: 100px;
-  /* width: 100px; */
-  /* font-size: 2rem; */
+  font-size: var(--line-font-size);
+  color: var(--font-color);
+  flex-basis: 150px;
   text-align: center;
-  /* padding: 1rem; */
   cursor: pointer;
-  /* background-color: beige; */
 }
 
 .price {
@@ -109,17 +109,26 @@ input[type="number"] {
 }
 
 .delete-button {
+  line-height: var(--lines-line-height);
+  font-family: "Satisfy", cursive;
   /* padding: 5px; */
   /* height: 50%; */
   cursor: pointer;
   background-color: var(--main-bg-color);
+  /* background-color: red; */
   /* color: white; */
   /* font-weight: bold; */
   /* letter-spacing: 2px; */
   border: none;
-  font-size: 1rem;
+  font-size: rem;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 .hidden {
-  height: 10px;
+  width: 0;
+  max-width: 150px;
+  overflow: hidden;
 }
