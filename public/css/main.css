@@ -1,51 +1,51 @@
 *,
 *::after,
 *::before {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
 }
 
 main {
-  margin: 0 auto;
-  width: 50%;
+    margin: 0 auto;
+    width: 50%;
 }
 .data-list {
-  background-color: hwb(139 33% 58% / 0.445);
-  padding: 7px;
+    background-color: hwb(139 33% 58% / 0.445);
+    padding: 7px;
 }
 .outer-box {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 7px;
-  gap: 7px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 7px;
+    gap: 7px;
 }
 
 .output {
-  list-style: none;
-  font-size: 2rem;
-  text-align: center;
-  padding: 1rem;
-  cursor: pointer;
-  background-color: beige;
+    list-style: none;
+    font-size: 2rem;
+    text-align: center;
+    padding: 1rem;
+    cursor: pointer;
+    background-color: beige;
 }
 
-button[type="submit"] {
-  padding: 5px;
+button[type='submit'] {
+    padding: 5px;
 }
 
-input[type="number"] {
-  margin: 0;
-  appearance: textfield;
+input[type='number'] {
+    margin: 0;
+    appearance: textfield;
 }
 
 .delete-button {
-  padding: 5px;
-  /* height: 50%; */
-  cursor: pointer;
-  background-color: rgb(189, 87, 87);
-  color: white;
-  font-weight: bold;
-  letter-spacing: 2px;
-  border: none;
+    padding: 5px;
+    /* height: 50%; */
+    cursor: pointer;
+    background-color: rgb(189, 87, 87);
+    color: white;
+    font-weight: bold;
+    letter-spacing: 2px;
+    border: none;
 }

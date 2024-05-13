@@ -1,4 +1,0 @@
-Still in progress
-
-Adding the error handling
-Adding the form for submitting
