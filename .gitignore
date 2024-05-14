@@ -4,5 +4,5 @@ public/data.json
 
 .idea/
 
-.prettierignore
-.prettierrc.json
+#.prettierignore
+#.prettierrc.json
